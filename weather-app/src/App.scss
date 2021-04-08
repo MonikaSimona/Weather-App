@@ -1,8 +1,14 @@
 @import '../src/styles/config';
+@import '../src/styles/fonts';
 @import '../src/styles/navbar';
+@import '../src/styles/currentweather';
+@import '../src/styles/searchbox';
+@import '../src/styles/favoritecities';
 
 
 body,html{
+  font-family: 'Karla', sans-serif !important;
+
   margin: 0;
   
 }

@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import SearchBox from './components/SearchBox';
 import ComingDaysWeatherList from './components/ComingDaysWeatherList';
 import FavoriteCitiesList from './components/FavoriteCitiesList';
+import CurrentWeather from './components/CurrentWeather';
 
 function App() {
   // console.log(process.env)
@@ -40,9 +41,10 @@ function App() {
     <Router>
       <Navbar/>
       <Switch>
-        <Route exact path='/home' component={SearchBox}/>
+        <Route exact path='/home' component={CurrentWeather}/>
         <Route  path='/coming-days' component={ComingDaysWeatherList}/>
         <Route  path='/favorites' component={FavoriteCitiesList}/>
+        <Route  path='/search' component={SearchBox}/>
       </Switch>
     </Router>
     </div>
