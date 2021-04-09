@@ -4,6 +4,7 @@ import SearchBox from './SearchBox';
 import { MdFavorite } from 'react-icons/md'
 import { filterCity } from '../store/actions/searchDataActions'
 import { currentCity } from '../store/actions/currentDataActions';
+import {addCityToFavorites} from '../store/actions/favoriteCitiesActions';
 
 
 function CurrentWeather(props) {
@@ -14,25 +15,33 @@ function CurrentWeather(props) {
         return fToCel.toFixed(2);
     }
     useEffect(() => {
-        props.currentCity('london');
-
+        // props.currentCity('london');
+        props.addCityToFavorites('skopje')
+        props.addCityToFavorites('london')
+        localStorage.setItem('favoriteCities',props.favoriteCities)
     }, [])
 
     const setFavorite = () => {
-        localStorage.setItem('cityName',currentdata.name)
+        console.log('click')
+        localStorage.setItem('favoriteCities',JSON.stringify(props.favoriteCities))
     }
-    console.log(props.currentCity)
+    console.log(props.favoriteCities)
     const { currentdata } = props;
     return (
 
         <>
             <SearchBox />
+            <span className="icon" onClick={setFavorite}>
+                        <MdFavorite className='favIcon' />
+                    </span>
             {currentdata ? (<div className='container currentWeather'>
                 <h1>The weather today</h1>
                 <div className="content">
-                    <p>Current weather for <span className="city">{currentdata.name}</span>,<span className="country">{currentdata.sys.country}</span> <span className="icon" onClick={setFavorite}>
+                    <p>Current weather for <span className="city">{currentdata.name}</span>,<span className="country">{currentdata.sys.country}</span> 
+                    {/* <span className="icon" onClick={setFavorite}>
                         <MdFavorite className='favIcon' />
-                    </span></p>
+                    </span> */}
+                    </p>
                     <img src={`http://openweathermap.org/img/w/${currentdata.weather[0].icon}.png`} alt="" />
                     <ul>
                         <li>
@@ -61,7 +70,8 @@ function CurrentWeather(props) {
 const mapStateToProps = (state, ownProps) => {
     return {
         filteredCity: state.searchDataReducer.data,
-        currentdata: state.currentDataReducer.data
+        currentdata: state.currentDataReducer.data,
+        favoriteCities:state.favoriteCitiesReducer
     }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -71,6 +81,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         currentCity: (cityQuery) => {
             dispatch(currentCity(cityQuery))
+        },
+        addCityToFavorites: (favoriteCity) => {
+            dispatch(addCityToFavorites(favoriteCity))
         }
     }
 }
