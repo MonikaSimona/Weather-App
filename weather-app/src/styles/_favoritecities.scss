@@ -28,8 +28,10 @@
             text-transform: capitalize;
         }
        .info{
+           position: relative;
            display: flex;
-           justify-content: space-around;
+           flex-direction: column;
+           justify-content: center;
            align-items: center;
            margin-left: auto;
            background-color: $primary-light;
@@ -38,15 +40,26 @@
            border-top-right-radius: 7px;
            border-bottom-right-radius: 7px;
            color: $primary;
+           @include media-lg{
+               flex-direction: row;
+               justify-content: space-around;
+           }
            
            span{
                margin: 0 10px;
            }
            .deleteCity{
                display: inline-block;
+               position: absolute;
+               right: 5px;
+               top: 0;
                line-height: 1;
                font-size: 2.5rem;
                margin-bottom: 5px;
+               @include media-lg{
+                   position: relative;
+
+               }
                &:hover{
                    color: $secondary;
                }

@@ -15,7 +15,7 @@ export default function Navbar() {
             <nav>
                 <ul>
                     
-                        <li onClick={closeNav} className='nav-logo'><NavLink to='/home'><TiWeatherWindyCloudy/></NavLink></li>
+                        <li onClick={closeNav} className='nav-logo'><NavLink to='/'><TiWeatherWindyCloudy/></NavLink></li>
                     
                         <img src={require('../assets/left-arrow.svg').default} alt="" className='nav-button' onClick={openNav}/>
                         <div className={`nav-items ${showNav ? 'nav-items-show' : ''}`}>

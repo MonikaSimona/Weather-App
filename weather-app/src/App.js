@@ -5,8 +5,8 @@ import {BrowserRouter as Router, Switch,Route} from 'react-router-dom';
 import {searchData, currentData} from './test-data';
 import Navbar from './components/Navbar';
 import SearchBox from './components/SearchBox';
-import ComingDaysWeatherList from './components/ComingDaysWeatherList';
-import FavoriteCitiesList from './components/FavoriteCitiesList';
+import ComingDaysWeatherList from './components/CommingDaysWeather/ComingDaysWeatherList';
+import FavoriteCitiesList from './components/FavoriteCities/FavoriteCitiesList';
 import CurrentWeather from './components/CurrentWeather';
 
 function App() {
@@ -41,7 +41,7 @@ function App() {
     <Router>
       <Navbar/>
       <Switch>
-        <Route exact path='/home' component={CurrentWeather}/>
+        <Route exact path='/' component={CurrentWeather}/>
         <Route  path='/coming-days' component={ComingDaysWeatherList}/>
         <Route  path='/favorites' component={FavoriteCitiesList}/>
         <Route  path='/search' component={SearchBox}/>
