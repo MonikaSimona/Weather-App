@@ -14,16 +14,19 @@ function CurrentWeather(props) {
         const fToCel = (fTemp - 32) * 5 / 9;
         return fToCel.toFixed(2);
     }
+    
     useEffect(() => {
-        // props.currentCity('london');
-        props.addCityToFavorites('skopje')
-        props.addCityToFavorites('london')
-        localStorage.setItem('favoriteCities',props.favoriteCities)
-    }, [])
+        // props.currentCity('london'); //ne brisi
+        localStorage.setItem('favoriteCities',JSON.stringify(props.favoriteCities))
+        
+        // localStorage.setItem('favoriteCities',props.favoriteCities)
+        }, [props.favoriteCities])
 
     const setFavorite = () => {
         console.log('click')
-        localStorage.setItem('favoriteCities',JSON.stringify(props.favoriteCities))
+        props.addCityToFavorites('skopje')
+        props.addCityToFavorites('london')
+        
     }
     console.log(props.favoriteCities)
     const { currentdata } = props;
@@ -31,16 +34,16 @@ function CurrentWeather(props) {
 
         <>
             <SearchBox />
-            <span className="icon" onClick={setFavorite}>
+            {/* <span className="icon" onClick={setFavorite}>
                         <MdFavorite className='favIcon' />
-                    </span>
+                    </span> */}
             {currentdata ? (<div className='container currentWeather'>
                 <h1>The weather today</h1>
                 <div className="content">
                     <p>Current weather for <span className="city">{currentdata.name}</span>,<span className="country">{currentdata.sys.country}</span> 
-                    {/* <span className="icon" onClick={setFavorite}>
+                    <span className="icon" onClick={setFavorite}>
                         <MdFavorite className='favIcon' />
-                    </span> */}
+                    </span>
                     </p>
                     <img src={`http://openweathermap.org/img/w/${currentdata.weather[0].icon}.png`} alt="" />
                     <ul>
