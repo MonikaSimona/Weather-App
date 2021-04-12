@@ -3,25 +3,27 @@ import FavoriteCitiesItem from './FavoriteCitiesItem'
 import { connect } from 'react-redux'
 
 function FavoriteCitiesList(props) {
-    const initList = JSON.parse(localStorage.getItem('favoriteCities')) || [];
+    
+    // const initList = localStorage.getItem("favoriteCities") === '[]' ? '' : localStorage.getItem("favoriteCities");
    
-    const [favoriteCitiesList, setFavoriteCities] = useState(initList)
+    const [favoriteCitiesList, setFavoriteCities] = useState({})
     console.log(favoriteCitiesList)
     useEffect(()=>{
-        if (localStorage.getItem('favoriteCities') !== undefined) {
-            setFavoriteCities(JSON.parse(localStorage.getItem('favoriteCities')) || '')
-            console.log(props.favoriteCities)
+        const data  = localStorage.getItem("favoriteCities");
+        console.log(data)
+        if (data) {
+            setFavoriteCities(JSON.parse(data))
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
     },[])
     useEffect(() => {
-        if (localStorage.getItem('favoriteCities') !== undefined) {
-            setFavoriteCities(JSON.parse(localStorage.getItem('favoriteCities')))
-            console.log(props.favoriteCities)
+        const data  = localStorage.getItem("favoriteCities");
+        if (data) {
+            setFavoriteCities(JSON.parse(data))
         }
 
 
-    }, [props.favoriteCities])
+    }, [ props.favoriteCities])
 
 
     return (

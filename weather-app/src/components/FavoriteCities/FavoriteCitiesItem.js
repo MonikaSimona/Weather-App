@@ -8,7 +8,7 @@ function FavoriteCitiesItem(props) {
 
 
     useEffect(() => {
-        localStorage.setItem('favoriteCities', JSON.stringify(props.favoriteCities))
+        localStorage.setItem("favoriteCities", JSON.stringify(props.favoriteCities))
     }, [props.favoriteCities])
 
 

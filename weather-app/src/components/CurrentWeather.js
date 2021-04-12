@@ -29,9 +29,9 @@ function CurrentWeather(props) {
             console.log("Not Available");
           }
         axios.get(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${coord.lat}&longitude=${coord.long}&localityLanguage=en`).then(res => {
-             if (!currentdata) {
-            props.currentCity(res.data.city); //ne brisi
-        }
+        //      if (!currentdata) {
+        //     props.currentCity(res.data.city); //ne brisi
+        // }
         })
 
        
@@ -39,9 +39,9 @@ function CurrentWeather(props) {
     }, [])
     useEffect(() => {
 
-        localStorage.setItem('favoriteCities', JSON.stringify(props.favoriteCities))
+        localStorage.setItem("favoriteCities", JSON.stringify(props.favoriteCities))
 
-    }, [props.favoriteCities])
+    })
 
     const openFavList = () => {
         setOpenFav(true)
@@ -56,7 +56,7 @@ function CurrentWeather(props) {
         console.log('click')
    
         // props.addCityToFavorites(currentdata.name)
-        // props.addCityToFavorites('london' + Math.random().toFixed(2))
+        props.addCityToFavorites('london' + Math.random().toFixed(2))
         // console.log(props.favoriteCities)
    
 
@@ -67,10 +67,10 @@ function CurrentWeather(props) {
         <>
             <SearchBox />
           <div className="wrapper">
-          {/* <span className="icon" onClick={setFavorite}>
+          <span className="icon" onClick={setFavorite}>
                                 <MdFavorite className='favIcon' />
-                            </span> */}
-                {currentdata ? (<div className=' currentWeather'>
+                            </span>
+                {/* {currentdata ? (<div className=' currentWeather'>
                     <h1>The weather today</h1>
                     <div className="content">
                 
@@ -98,7 +98,7 @@ function CurrentWeather(props) {
                             </li>
                         </ul>
                     </div>
-                </div>) : null}
+                </div>) : null} */}
                 
                       <FavoriteCitiesList openFav={openFav} closeFavList={closeFavList}/>
           </div>
