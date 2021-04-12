@@ -10,6 +10,7 @@ function SearchBox(props) {
   
 
     const handlefilterCity = () => {
+        localStorage.setItem('searchQuery',searchQuery)
         props.currentCity(searchQuery);
         console.log(props.currentdata)
     }

@@ -5,10 +5,12 @@ const favoriteCitiesReducer = (state = initState,action) =>{
         case 'ADD_CITY':
             return [
                ...state,
-               {
-                   name:action.payload
-               }
+               
+                  action.payload
+               
             ];
+        case 'DELETE_CITY':
+            return state.filter(city => city !== action.payload);
      
         default:
             return state;

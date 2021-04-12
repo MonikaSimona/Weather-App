@@ -20,8 +20,7 @@ export default function Navbar() {
                         <img src={require('../assets/left-arrow.svg').default} alt="" className='nav-button' onClick={openNav}/>
                         <div className={`nav-items ${showNav ? 'nav-items-show' : ''}`}>
                         <img src={require('../assets/left-arrow.svg').default} alt="" className='nav-button-close' onClick={closeNav} />
-                            <li onClick={closeNav}><NavLink to='/favorites'>Favorite Cities</NavLink></li>
-                            <li onClick={closeNav}><NavLink to='/search'>Search for City</NavLink></li>
+                           
                             <li onClick={closeNav}><NavLink to='coming-days'>The Weather In 10 Days</NavLink></li>
                         </div>
                     

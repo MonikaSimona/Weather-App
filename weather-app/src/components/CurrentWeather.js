@@ -4,68 +4,106 @@ import SearchBox from './SearchBox';
 import { MdFavorite } from 'react-icons/md'
 import { filterCity } from '../store/actions/searchDataActions'
 import { currentCity } from '../store/actions/currentDataActions';
-import {addCityToFavorites} from '../store/actions/favoriteCitiesActions';
+import { addCityToFavorites } from '../store/actions/favoriteCitiesActions';
+import FavoriteCitiesList from './FavoriteCities/FavoriteCitiesList';
+import axios from 'axios';
 
 
 function CurrentWeather(props) {
-
+    const [counter, setCounter] = useState(0)
+    const [openFav, setOpenFav] = useState(false)
+    const [open, setOpen] = useState(true)
+    const [coord, setCoord] = useState({lat:'',long:''})
+    const { currentdata } = props;
     const convertTemp = (fareinheit) => {
         const fTemp = fareinheit;
         const fToCel = (fTemp - 32) * 5 / 9;
         return fToCel.toFixed(2);
     }
-    
     useEffect(() => {
-        // props.currentCity('london'); //ne brisi
-        localStorage.setItem('favoriteCities',JSON.stringify(props.favoriteCities))
-        
-        // localStorage.setItem('favoriteCities',props.favoriteCities)
-        }, [props.favoriteCities])
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+             setCoord({lat:position.coords.latitude,long:position.coords.longitude})
+              });
+          } else {
+            console.log("Not Available");
+          }
+        axios.get(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${coord.lat}&longitude=${coord.long}&localityLanguage=en`).then(res => {
+             if (!currentdata) {
+            props.currentCity(res.data.city); //ne brisi
+        }
+        })
 
-    const setFavorite = () => {
-        console.log('click')
-        props.addCityToFavorites('skopje')
-        props.addCityToFavorites('london')
-        
+       
+
+    }, [])
+    useEffect(() => {
+
+        localStorage.setItem('favoriteCities', JSON.stringify(props.favoriteCities))
+
+    }, [props.favoriteCities])
+
+    const openFavList = () => {
+        setOpenFav(true)
+        setOpen(false)
     }
-    console.log(props.favoriteCities)
-    const { currentdata } = props;
+    const closeFavList = () => {
+        setOpenFav(false)
+        setOpen(true)
+    }
+    const setFavorite = () => {
+        setCounter(counter + 1)
+        console.log('click')
+   
+        // props.addCityToFavorites(currentdata.name)
+        // props.addCityToFavorites('london' + Math.random().toFixed(2))
+        // console.log(props.favoriteCities)
+   
+
+    }
+   
     return (
 
         <>
             <SearchBox />
-            {/* <span className="icon" onClick={setFavorite}>
-                        <MdFavorite className='favIcon' />
-                    </span> */}
-            {currentdata ? (<div className='container currentWeather'>
-                <h1>The weather today</h1>
-                <div className="content">
-                    <p>Current weather for <span className="city">{currentdata.name}</span>,<span className="country">{currentdata.sys.country}</span> 
-                    <span className="icon" onClick={setFavorite}>
-                        <MdFavorite className='favIcon' />
-                    </span>
-                    </p>
-                    <img src={`http://openweathermap.org/img/w/${currentdata.weather[0].icon}.png`} alt="" />
-                    <ul>
-                        <li>
-                            <span className="title"> &nbsp;</span> <span className="info">{currentdata.weather[0].description}</span>
-                        </li>
-                        <li>
-                            <span className="title">Temperature:</span> <span className="info">{currentdata.main.temp} &deg;F / {convertTemp(currentdata.main.temp)} &deg;C</span>
-                        </li>
-                        <li>
-                            <span className="title">Feels like:</span> <span className="info">{currentdata.main.feels_like} &deg;F / {convertTemp(currentdata.main.temp)} &deg;C</span>
-                        </li>
-                        <li>
-                            <span className="title">Humidity:</span> <span className="info">{currentdata.main.humidity}</span>
-                        </li>
-                        <li>
-                            <span className="title">Wind:</span> <span className="info">{currentdata.wind.deg} deg, speed {currentdata.wind.speed} km/h</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>) : null}
-
+          <div className="wrapper">
+          {/* <span className="icon" onClick={setFavorite}>
+                                <MdFavorite className='favIcon' />
+                            </span> */}
+                {currentdata ? (<div className=' currentWeather'>
+                    <h1>The weather today</h1>
+                    <div className="content">
+                
+                        <p>Current weather for <span className="city">{currentdata.name}</span>,<span className="country">{currentdata.sys.country}</span>
+                            <span className="icon" onClick={setFavorite}>
+                                <MdFavorite className='favIcon' />
+                            </span>
+                        </p>
+                        <img src={`http://openweathermap.org/img/w/${currentdata.weather[0].icon}.png`} alt="" />
+                        <ul>
+                            <li>
+                                <span className="title"> &nbsp;</span> <span className="info">{currentdata.weather[0].description}</span>
+                            </li>
+                            <li>
+                                <span className="title">Temperature:</span> <span className="info">{currentdata.main.temp} &deg;F / {convertTemp(currentdata.main.temp)} &deg;C</span>
+                            </li>
+                            <li>
+                                <span className="title">Feels like:</span> <span className="info">{currentdata.main.feels_like} &deg;F / {convertTemp(currentdata.main.temp)} &deg;C</span>
+                            </li>
+                            <li>
+                                <span className="title">Humidity:</span> <span className="info">{currentdata.main.humidity}</span>
+                            </li>
+                            <li>
+                                <span className="title">Wind:</span> <span className="info">{currentdata.wind.deg} deg, speed {currentdata.wind.speed} km/h</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>) : null}
+                
+                      <FavoriteCitiesList openFav={openFav} closeFavList={closeFavList}/>
+          </div>
+          {open && <div className="openFav" onClick={openFavList}> &larr; open favorites</div> }
+          
         </>
     )
 }
@@ -74,7 +112,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         filteredCity: state.searchDataReducer.data,
         currentdata: state.currentDataReducer.data,
-        favoriteCities:state.favoriteCitiesReducer
+        favoriteCities: state.favoriteCitiesReducer
     }
 }
 const mapDispatchToProps = (dispatch, ownProps) => {
