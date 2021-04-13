@@ -1,27 +1,25 @@
 import React, { useEffect } from 'react'
 import { deleteCityFromFavorites } from '../../store/actions/favoriteCitiesActions'
 import { connect } from 'react-redux'
-
 import { currentCity } from '../../store/actions/currentDataActions';
 
 function FavoriteCitiesItem(props) {
 
 
     useEffect(() => {
-        localStorage.setItem('favoriteCities', JSON.stringify(props.favoriteCities))
+        console.log(props.favoriteCities)
+        localStorage.setItem("favoriteCities", JSON.stringify(props.favoriteCities))
     }, [props.favoriteCities])
 
 
 
     const deleteCityFromFav = () => {
-        
-        console.log(props.city)
-        props.deleteCity(props.city)
 
+        props.deleteCity(props.city)
 
     }
     const previewCity = () => {
-        // props.currentCity(props.city)
+        props.currentCity(props.city)
         props.closeFavList()
     }
     return (

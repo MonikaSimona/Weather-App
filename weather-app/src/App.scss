@@ -4,9 +4,11 @@
 @import '../src/styles/currentweather';
 @import '../src/styles/searchbox';
 @import '../src/styles/favoritecities';
+@import '../src/styles/comingdaysweather';
 
 
 body,html{
+  scroll-behavior: smooth;
   font-family: 'Karla', sans-serif !important;
 
   margin: 0;

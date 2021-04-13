@@ -1,38 +1,43 @@
-.wrapper{
+.wrapper {
     display: flex;
     position: relative;
     // overflow-x: hidden;
-  
 }
-.openFav{
-        cursor: pointer;
-        border-radius: 5px;
+.openFav {
+    cursor: pointer;
+    border-radius: 5px;
     position: absolute;
     right: 0;
     top: 40%;
-    font-family:'Karla', sans-serif !important ;
+    font-family: "Karla", sans-serif !important ;
     background-color: $primary-light;
     width: 50px;
     font-size: 0.7rem;
     text-align: center;
     color: $primary;
-    @include media-lg{
+    @include media-lg {
         display: none;
     }
-
 }
 .currentWeather {
     position: relative;
-   
+
     width: 100%;
-    @include media-lg{
+    @include media-lg {
         width: 70%;
     }
     h1 {
         font-size: 2rem;
         color: lighten($secondary, 30%);
+        display: flex;
+        align-items: center;
         @include media-lg {
             font-size: 2.5rem;
+        }
+        .date{
+            font-weight: bold;
+            font-size: 2rem;
+            margin-left: 10px;
         }
     }
     .content {
@@ -50,9 +55,9 @@
                 margin: 5px auto;
             }
         }
-        .icon{
+        .icon {
             position: relative;
-            &::after{
+            &::after {
                 font-size: 0.7rem;
                 display: none;
                 content: "add to favorites";
@@ -64,8 +69,7 @@
                 left: 30px;
                 transition: all 0.3s;
             }
-            &:hover::after{
-                
+            &:hover::after {
                 display: inline-block;
             }
             .favIcon {
@@ -78,11 +82,9 @@
                     color: $primary;
                     transform: scale(1.1);
                 }
-            
-               
             }
         }
-     
+
         ul {
             width: 100%;
             padding-left: 0;
@@ -148,4 +150,11 @@
             color: $primary;
         }
     }
+}
+
+.toggle{
+    text-align: center;
+    cursor: pointer;
+    color: $primary;
+    margin-bottom: 10px;
 }

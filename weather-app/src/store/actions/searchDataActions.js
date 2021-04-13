@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const filterCity = (cityQuery) => {
+export const setComingDaysWeather = (cityQuery) => {
 
     return (dispatch) => {
       
@@ -9,7 +9,7 @@ export const filterCity = (cityQuery) => {
             url: `${process.env.REACT_APP_RAPID_API__SEARCH_DATA_URL}`,
             params: {
                 q: `${cityQuery}`,
-                cnt: '1',
+                cnt: '10',
                 mode: 'null',
                 lon: '0',
                 type: 'link, accurate',

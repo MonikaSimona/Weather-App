@@ -7,10 +7,14 @@ nav {
         display: flex;
         align-items: center;
         list-style-type: none;
+        li:last-child {
+            color: lighten($secondary, 30%);
+            font-weight: bold;
+        }
         .nav-button {
             width: 40px;
             cursor: pointer;
-            @include media-lg{
+            @include media-lg {
                 display: none;
             }
         }
@@ -21,18 +25,17 @@ nav {
 
         .nav-items {
             display: flex;
-            overflow-x: hidden;
-            transition: 0.4s ;
-            flex-direction: column;
-            background-color: $primary-light;
-            padding-top: 20%;
-            position: fixed;
-            z-index: 1;
-            width: 0;
-            height: 100vh;
-            top: 0;
-            right: 0;
-            @include media-lg{
+            // overflow-x: hidden;
+            // transition: 0.4s;
+            // flex-direction: column;
+            // background-color: $primary-light;
+            // padding-top: 20%;
+            // position: fixed;
+            // z-index: 1;
+            // height: 100vh;
+            // top: 0;
+            // right: 0;
+            @include media-lg {
                 flex-direction: row;
                 position: relative;
                 height: unset;
@@ -41,58 +44,28 @@ nav {
                 background-color: transparent;
                 justify-content: end;
             }
-            li{
+            li {
                 display: block;
                 font-size: 1.5rem;
                 margin: 20px 15px;
                 margin-bottom: 0;
                 text-transform: capitalize;
             }
-            a{
+            a {
                 display: block;
                 width: 100%;
             }
-
-            .nav-button-close {
-                transform: rotate(180deg);
-                width: 30px;
-                position: absolute;
-                top: 20px;
-                left: 10px;
-                cursor: pointer;
-                &:hover {
-                    filter: invert(45%) sepia(12%) saturate(445%) hue-rotate(201deg) brightness(96%) contrast(89%);
-                }
-                @include media-lg{
-                    display: none;
-                }
-            }
-            
-        }
-        .nav-items-show {
-            width: 80%;
-            li {
-                font-size: 1.5rem;
-                margin: 20px 15px;
-                margin-bottom: 0;
-
-                &:hover {
-                    transform: scale(1.01);
-                    transition: all 0.3s ease-in-out;
-                }
-            }
-           
         }
     }
     a {
         display: block;
         color: $primary;
-        transition: .3s;
+        transition: 0.3s;
         &:hover {
             text-decoration: none;
             color: $secondary;
         }
-        &:active{
+        &:active {
             color: $secondary !important;
         }
     }

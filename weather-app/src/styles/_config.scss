@@ -1,11 +1,10 @@
 $primary: #00006c;
 $primary-light: lighten($primary, 77%);
 $secondary: #727284;
-$line:rgba(128, 128, 128, 0.192);
+$line: rgba(128, 128, 128, 0.192);
 
-@mixin media-lg{
-    @media  only screen and (min-width:769px) {
+@mixin media-lg {
+    @media only screen and (min-width: 769px) {
         @content;
-        
     }
 }

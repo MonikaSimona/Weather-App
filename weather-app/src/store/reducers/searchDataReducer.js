@@ -1,6 +1,6 @@
-import {searchData} from '../../test-data'
-const initState = searchData
-const searchDataReducer = (state=searchData,action) =>{
+
+const initState = {}
+const searchDataReducer = (state=initState,action) =>{
     switch (action.type) {
         case 'SET_CITY':
             return {
