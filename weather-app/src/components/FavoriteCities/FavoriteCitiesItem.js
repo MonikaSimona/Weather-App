@@ -16,7 +16,9 @@ function FavoriteCitiesItem(props) {
     const deleteCityFromFav = () => {
 
         props.deleteCity(props.city)
-
+        if(props.favoriteCities.length === 1){
+            localStorage.removeItem("favoriteCities")
+        }
     }
     const previewCity = () => {
         props.currentCity(props.city)
